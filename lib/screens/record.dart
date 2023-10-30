@@ -5,12 +5,12 @@ import 'package:vhq/common.dart';
 
 class AllCameras {
   List<CameraDescription> cameras = <CameraDescription>[];
-  static final AllCameras _instance = AllCameras.create();
+  static final AllCameras _instance = AllCameras._create();
 
   // Private Constructor
   AllCameras._();
 
-  static AllCameras create() {
+  static AllCameras _create() {
     var retCameras = AllCameras._();
     return retCameras;
   }
@@ -18,8 +18,7 @@ class AllCameras {
   Future<void> populate() async {
     try {
       WidgetsFlutterBinding.ensureInitialized();
-      var findCameras = await availableCameras();
-      cameras = findCameras;
+      cameras = await availableCameras();
     } on CameraException catch (e) {
       logError(e.code, e.description);
     }
@@ -46,6 +45,17 @@ class _RecordPageState extends State<RecordPage> {
   @override
   Widget build(BuildContext buildContext) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+        title: const Text("Record"),
+        actions:[
+          PopupMenuButton(itemBuilder: (context) =>
+              allCameras.cameras.map(
+                      (e) => PopupMenuItem(child: Text(e.toString()))
+              ).toList()
+          )
+        ]
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

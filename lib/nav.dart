@@ -13,8 +13,8 @@ class _NavigationState extends State<NavBar> {
   int currentPageIndex = 0;
 
   final _pageOptions = <Widget>[
-    HomePage(),
-    RecordPage()
+    const HomePage(),
+    const RecordPage()
   ];
 
   @override
@@ -28,21 +28,16 @@ class _NavigationState extends State<NavBar> {
         },
         indicatorColor: Theme.of(context).colorScheme.primaryContainer,
         selectedIndex: currentPageIndex,
-        destinations: const <Widget>[
+        destinations: <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.home),
-            icon: Icon(Icons.home_outlined),
+            icon: Icon(Icons.home, color: Theme.of(context).colorScheme.primary),
             label: 'Home',
           ),
           NavigationDestination(
-            icon: Icon(Icons.fiber_manual_record),
+            icon: Icon(Icons.fiber_manual_record, color: Theme.of(context).colorScheme.primary),
+            selectedIcon: Icon(Icons.fiber_manual_record, color: Theme.of(context).colorScheme.error),
             label: 'Record',
           ),
-          // NavigationDestination(
-          //   selectedIcon: Icon(Icons.school),
-          //   icon: Icon(Icons.school_outlined),
-          //   label: 'School',
-          // ),
         ],
       ),
       body: _pageOptions[currentPageIndex],
