@@ -28,6 +28,7 @@ class _NavigationState extends State<NavBar> {
         },
         indicatorColor: Theme.of(context).colorScheme.primaryContainer,
         selectedIndex: currentPageIndex,
+        labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         destinations: <Widget>[
           NavigationDestination(
             icon: Icon(Icons.home, color: Theme.of(context).colorScheme.primary),
