@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vhq/screens/home.dart';
-import 'package:vhq/screens/record.dart';
+import 'package:vhq/screens/record/record.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
