@@ -37,9 +37,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        title: Text("Practice Sessions",
-            style:
-                TextStyle(color: Theme.of(context).colorScheme.primary)),
+        title: const Text("Practice Sessions"),
       ),
         body: Center(
           child: Column(

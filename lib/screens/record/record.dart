@@ -12,10 +12,8 @@ class RecordPage extends StatefulWidget {
 }
 
 class _RecordPageState extends State<RecordPage> {
-  AllCameras allCameras = AllCameras();
-  _RecordPageState() {
-    allCameras.populate();
-  }
+  late AllCameras allCameras = AllCameras();
+  int currCameraInd = 0;
 
   @override
   Widget build(BuildContext buildContext) {
@@ -27,13 +25,24 @@ class _RecordPageState extends State<RecordPage> {
             appBar: AppBar(
                 backgroundColor: Theme.of(context).colorScheme.primaryContainer,
                 title: const Text("Record"),
-                actions:[PopupMenuButton(itemBuilder: (context) =>
-                    allCameras.cameras.map((e) =>
-                        PopupMenuItem(child: Text(e.toString()))).toList())]
+                actions:[
+                  PopupMenuButton<int>(
+                    initialValue: currCameraInd,
+                    onSelected: (int ind) {
+                      setState(() {
+                        currCameraInd = ind;
+                      });
+                    },
+                    itemBuilder: (context) => Iterable<int>.generate(allCameras.cameras.length).map(
+                            (ind) => PopupMenuItem(
+                              value: ind,
+                              child: Text(allCameras.cameras[ind].toString()),
+                            )
+                    ).toList(),
+                  ),
+                ]
             ),
-            // TODO: Change 0 to the camera selected from AppBar
-            // TODO: Turn this into a FutureBuilder
-            body: CameraPreviewScreen(camera: allCameras.cameras[0]),
+            body: CameraPreviewScreen(camera: allCameras.cameras[currCameraInd]),
           );
         } else {
           // Otherwise, display a loading indicator.
